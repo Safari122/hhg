@@ -1,0 +1,28 @@
+import matplotlib.pyplot as plt
+import matplotlib.animation as animation
+
+# Создание фигуры и осей
+fig, ax = plt.subplots()
+
+# Инициализация фонового изображения
+background_image = plt.imread('background.jpg')  # Фоновое изображение леса
+ax.imshow(background_image)  # Отображение фонового изображения на осях
+
+# Инициализация изображения рыжей лисы в белой кофте
+fox_image = plt.imread('fox.png')  # Изображение рыжей лисы
+fox = ax.imshow(fox_image, alpha=0)  # Отображение изображения лисы на осях с нулевой прозрачностью
+
+# Функция для обновления анимации
+def update(frame):
+    if frame < 50:
+        # Машет рукой вправо
+        fox.set_position((frame, 0))
+    else:
+        # Машет рукой влево
+        fox.set_position((100 - frame, 0))
+
+# Создание анимации
+ani = animation.FuncAnimation(fig, update, frames=100, interval=100, repeat=True)
+
+# Отображение анимации
+plt.show()
